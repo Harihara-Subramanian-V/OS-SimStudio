@@ -1,0 +1,23 @@
+{
+  "name": "os-simstudio",
+  "version": "1.0.0",
+  "description": "Operating System Principles Interactive Simulation Suite (BAITE201)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/verify-simulators.js"
+  },
+  "keywords": [
+    "operating-systems",
+    "simulation",
+    "cpu-scheduling",
+    "deadlock-avoidance",
+    "bankers-algorithm",
+    "virtual-memory",
+    "paging",
+    "disk-scheduling"
+  ],
+  "author": "Antigravity OS Team",
+  "license": "MIT"
+}

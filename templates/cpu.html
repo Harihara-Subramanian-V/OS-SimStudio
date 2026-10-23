@@ -1,0 +1,108 @@
+<section id="section-cpu" class="tab-section" aria-labelledby="cpu-tab-heading">
+  <div class="panel-header">
+    <h2 id="cpu-tab-heading" class="panel-title">
+      <span class="brand-logo-icon" style="width:28px; height:28px; font-size:0.85rem;">M1</span>
+      CPU Scheduling & Process Lifecycle Simulator
+    </h2>
+    <span class="badge badge-ready">Module 1 & Lab 3</span>
+  </div>
+
+  <div class="cpu-layout">
+    <!-- Controls Column -->
+    <div class="panel">
+      <h3 class="panel-title" style="font-size: 0.95rem; margin-bottom: 12px;">Scheduler Configuration</h3>
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="cpu-algo-select" class="form-label">Scheduling Algorithm</label>
+        <select id="cpu-algo-select" class="form-select" aria-label="Select CPU Scheduling Algorithm">
+          <option value="FCFS">First-Come, First-Served (FCFS)</option>
+          <option value="SJF_NON">Shortest Job First (Non-preemptive)</option>
+          <option value="SRTF">Shortest Remaining Time First (SRTF)</option>
+          <option value="PRIORITY_NON">Priority Scheduling (Non-preemptive)</option>
+          <option value="PRIORITY_PRE">Priority Scheduling (Preemptive)</option>
+          <option value="RR">Round Robin (Time Quantum)</option>
+          <option value="MLFQ">Multi-Level Feedback Queue (MLFQ)</option>
+        </select>
+      </div>
+
+      <div id="cpu-quantum-group" class="form-group" style="display: none; margin-bottom: 12px;">
+        <label for="cpu-quantum-input" class="form-label">Time Quantum (ms)</label>
+        <input id="cpu-quantum-input" type="number" class="form-input" min="1" max="20" value="2" aria-label="Round Robin Time Quantum">
+      </div>
+
+      <div style="display: flex; gap: 8px; margin-top: 16px;">
+        <button id="btn-add-process" class="btn btn-secondary btn-sm" aria-label="Add new process">
+          + Add Process
+        </button>
+        <button id="btn-run-cpu" class="btn btn-primary btn-sm" style="flex:1;" aria-label="Run CPU simulation">
+          Run Simulation
+        </button>
+      </div>
+
+      <div class="process-table-wrapper">
+        <table class="table-custom" aria-label="Process control parameters table">
+          <thead>
+            <tr>
+              <th>PID</th>
+              <th>Arrival</th>
+              <th>Burst</th>
+              <th>Priority</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cpu-process-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Visualization Column -->
+    <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+      <!-- Metrics Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div id="cpu-metric-wait" class="metric-value">0.0 ms</div>
+          <div class="metric-label">Avg Waiting Time</div>
+        </div>
+        <div class="metric-card">
+          <div id="cpu-metric-tat" class="metric-value">0.0 ms</div>
+          <div class="metric-label">Avg Turnaround Time</div>
+        </div>
+        <div class="metric-card">
+          <div id="cpu-metric-util" class="metric-value">100%</div>
+          <div class="metric-label">CPU Utilization</div>
+        </div>
+      </div>
+
+      <!-- Gantt Chart Canvas Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title" style="font-size: 0.95rem;">Gantt Chart Execution Timeline</h3>
+          <span style="font-size: 0.75rem; color: var(--text-subtle);">Millisecond time scale</span>
+        </div>
+        <div class="gantt-container">
+          <canvas id="cpu-gantt-canvas" class="gantt-canvas" aria-label="CPU Gantt Chart Visualizer"></canvas>
+        </div>
+      </div>
+
+      <!-- Process Results Table -->
+      <div class="panel">
+        <h3 class="panel-title" style="font-size: 0.95rem; margin-bottom: 8px;">Calculated PCB Metrics</h3>
+        <div class="process-table-wrapper">
+          <table class="table-custom" aria-label="Process results and turnaround time table">
+            <thead>
+              <tr>
+                <th>PID</th>
+                <th>Arrival</th>
+                <th>Burst</th>
+                <th>Start</th>
+                <th>Completion</th>
+                <th>Turnaround</th>
+                <th>Waiting</th>
+              </tr>
+            </thead>
+            <tbody id="cpu-results-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,92 @@
+<section id="section-sync" class="tab-section" style="display: none;" aria-labelledby="sync-tab-heading">
+  <div class="panel-header">
+    <h2 id="sync-tab-heading" class="panel-title">
+      <span class="brand-logo-icon" style="width:28px; height:28px; font-size:0.85rem;">M2</span>
+      IPC, Synchronization & Deadlock Sandbox
+    </h2>
+    <span class="badge badge-ready">Module 2 & Labs 4, 5</span>
+  </div>
+
+  <div class="sync-grid">
+    <!-- Banker's Algorithm Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <h3 class="panel-title" style="font-size: 0.95rem;">Banker's Algorithm for Deadlock Avoidance</h3>
+        <span id="banker-safe-status" class="badge badge-running">Checking State...</span>
+      </div>
+
+      <div id="banker-safe-sequence" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary); margin-bottom: 12px;"></div>
+
+      <div id="banker-avail-container" style="margin-bottom: 12px;"></div>
+      <div id="banker-matrices-container" style="overflow-x: auto; margin-bottom: 12px;"></div>
+      <div id="banker-need-container" style="overflow-x: auto; margin-bottom: 12px;"></div>
+
+      <!-- Resource Request Simulator -->
+      <div style="background: rgba(13, 18, 28, 0.7); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-top: 12px;">
+        <h4 style="font-size: 0.82rem; margin-bottom: 8px; color: var(--text-muted); text-transform: uppercase;">Resource-Request Algorithm</h4>
+        <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <select id="banker-req-pid" class="form-select btn-sm" aria-label="Requesting Process">
+            <option value="0">P0</option><option value="1">P1</option><option value="2">P2</option><option value="3">P3</option><option value="4">P4</option>
+          </select>
+          <input id="req-r0" type="number" min="0" max="10" value="1" class="matrix-cell-input" aria-label="Request Resource A" title="Req A">
+          <input id="req-r1" type="number" min="0" max="10" value="0" class="matrix-cell-input" aria-label="Request Resource B" title="Req B">
+          <input id="req-r2" type="number" min="0" max="10" value="2" class="matrix-cell-input" aria-label="Request Resource C" title="Req C">
+          <button id="btn-test-request" class="btn btn-secondary btn-sm" aria-label="Simulate resource allocation request">Test Request</button>
+          <button id="btn-run-banker" class="btn btn-primary btn-sm" aria-label="Run banker safety check">Re-verify Safety</button>
+        </div>
+        <div id="banker-req-result" style="margin-top: 8px; font-size: 0.8rem;"></div>
+      </div>
+
+      <div style="margin-top: 14px;">
+        <h4 style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase;">Step-by-Step Execution Trace</h4>
+        <div id="banker-trace-steps" style="max-height: 120px; overflow-y: auto;"></div>
+      </div>
+    </div>
+
+    <!-- Dining Philosophers & Producer Consumer Column -->
+    <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+      <!-- Dining Philosophers Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title" style="font-size: 0.95rem;">Dining Philosophers Problem</h3>
+          <div style="display: flex; gap: 6px;">
+            <button id="btn-toggle-deadlock" class="btn btn-secondary btn-sm" aria-label="Toggle between safe and deadlock mode">Mode: Safe</button>
+            <button id="btn-start-dining" class="btn btn-primary btn-sm" aria-label="Start dining simulation">Start</button>
+            <button id="btn-reset-dining" class="btn btn-secondary btn-sm" aria-label="Reset dining table">Reset</button>
+          </div>
+        </div>
+        <div id="philosophers-arena" class="philosophers-arena" aria-label="Dining philosophers circular table simulation"></div>
+        <div style="text-align: center; font-size: 0.78rem; color: var(--text-muted);">
+          <span style="color:#38bdf8;">● Thinking</span> &nbsp;|&nbsp;
+          <span style="color:#f59e0b;">● Hungry</span> &nbsp;|&nbsp;
+          <span style="color:#10b981;">● Eating</span> &nbsp;|&nbsp;
+          <span style="color:#f43f5e;">| Chopstick Held</span>
+        </div>
+      </div>
+
+      <!-- Producer Consumer Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title" style="font-size: 0.95rem;">Producer-Consumer Bounded Buffer (Semaphores)</h3>
+          <div style="display: flex; gap: 6px;">
+            <button id="btn-auto-produce" class="btn btn-secondary btn-sm" aria-label="Auto produce toggle">Auto Produce</button>
+            <button id="btn-auto-consume" class="btn btn-secondary btn-sm" aria-label="Auto consume toggle">Auto Consume</button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around; margin-bottom: 12px; font-family: var(--font-mono); font-size: 0.85rem;">
+          <div>mutex = <strong id="sem-mutex-val" style="color:var(--color-primary);">1</strong></div>
+          <div>empty = <strong id="sem-empty-val" style="color:var(--color-emerald);">6</strong></div>
+          <div>full = <strong id="sem-full-val" style="color:var(--color-amber);">0</strong></div>
+        </div>
+
+        <div id="buffer-slots-container" class="buffer-slots-container" aria-label="Bounded buffer slot states"></div>
+
+        <div style="display: flex; justify-content: center; gap: 12px; margin-top: 12px;">
+          <button id="btn-produce-one" class="btn btn-success btn-sm" aria-label="Produce one item">+ Produce Item</button>
+          <button id="btn-consume-one" class="btn btn-danger btn-sm" aria-label="Consume one item">- Consume Item</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

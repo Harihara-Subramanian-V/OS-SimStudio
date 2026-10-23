@@ -1,0 +1,139 @@
+<section id="section-memory" class="tab-section" style="display: none;" aria-labelledby="mem-tab-heading">
+  <div class="panel-header">
+    <h2 id="mem-tab-heading" class="panel-title">
+      <span class="brand-logo-icon" style="width:28px; height:28px; font-size:0.85rem;">M3</span>
+      Memory Management & Virtual Memory Studio
+    </h2>
+    <span class="badge badge-ready">Module 3 & Lab 6</span>
+  </div>
+
+  <div class="memory-grid">
+    <!-- Page Replacement Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <h3 class="panel-title" style="font-size: 0.95rem;">Page Replacement Algorithms & Belady's Anomaly</h3>
+        <button id="btn-test-belady" class="btn btn-secondary btn-sm" aria-label="Demonstrate Belady Anomaly">Test Belady's Anomaly</button>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 16px;">
+        <div class="form-group" style="flex: 2; min-width: 240px;">
+          <label for="paging-ref-input" class="form-label">Reference String (Comma Separated)</label>
+          <input id="paging-ref-input" class="form-input" value="7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1" aria-label="Page Reference String">
+        </div>
+        <div class="form-group" style="width: 120px;">
+          <label for="paging-frames-select" class="form-label">Frames</label>
+          <select id="paging-frames-select" class="form-select" aria-label="Number of physical frames">
+            <option value="3" selected>3 Frames</option>
+            <option value="4">4 Frames</option>
+            <option value="5">5 Frames</option>
+          </select>
+        </div>
+        <div class="form-group" style="width: 160px;">
+          <label for="paging-algo-select" class="form-label">Algorithm</label>
+          <select id="paging-algo-select" class="form-select" aria-label="Page replacement algorithm">
+            <option value="FIFO">FIFO (First-In, First-Out)</option>
+            <option value="LRU">LRU (Least Recently Used)</option>
+            <option value="OPT">Optimal (Clairvoyant)</option>
+            <option value="CLOCK">Clock (Second Chance)</option>
+            <option value="LFU">LFU (Least Frequently Used)</option>
+          </select>
+        </div>
+        <button id="btn-run-paging" class="btn btn-primary" aria-label="Run page replacement simulation">Simulate</button>
+      </div>
+
+      <div class="metrics-grid" style="margin-bottom: 16px;">
+        <div class="metric-card">
+          <div id="paging-metric-faults" class="metric-value">0</div>
+          <div class="metric-label">Page Faults</div>
+        </div>
+        <div class="metric-card">
+          <div id="paging-metric-hits" class="metric-value">0</div>
+          <div class="metric-label">Page Hits</div>
+        </div>
+        <div class="metric-card">
+          <div id="paging-metric-ratio" class="metric-value">0%</div>
+          <div class="metric-label">Fault Ratio</div>
+        </div>
+      </div>
+
+      <h4 style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">Reference String Stream</h4>
+      <div id="ref-string-stream" class="ref-string-stream"></div>
+
+      <h4 style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">Frame Allocation Matrix</h4>
+      <div id="frames-matrix-container" class="frames-matrix-wrapper"></div>
+    </div>
+
+    <!-- TLB Virtual Address Translation Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <h3 class="panel-title" style="font-size: 0.95rem;">TLB & Hardware Address Translation (4 KB Pages)</h3>
+        <span id="tlb-status-badge" class="badge badge-running">TLB Status</span>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+        <div class="form-group" style="width: 220px;">
+          <label for="virt-addr-input" class="form-label">Virtual Address (Hex / Dec)</label>
+          <input id="virt-addr-input" class="form-input" value="0x2A3C" aria-label="Virtual Address input">
+        </div>
+        <button id="btn-translate-addr" class="btn btn-primary btn-sm" aria-label="Translate address">Translate Address</button>
+      </div>
+
+      <div class="tlb-flow-diagram">
+        <div class="tlb-node">
+          <div class="tlb-node-title">Virtual Address</div>
+          <div id="tlb-page-num" style="font-family: var(--font-mono); font-size: 0.85rem; margin-top: 4px;">Page p: 2</div>
+          <div id="tlb-offset-val" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">Offset d: 0xA3C</div>
+        </div>
+        <div style="color: var(--color-primary); font-size: 1.2rem;">➔</div>
+        <div class="tlb-node" style="border-color: var(--color-primary);">
+          <div class="tlb-node-title">TLB Cache (4 Entries)</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Associative Hardware Lookup</div>
+        </div>
+        <div style="color: var(--color-primary); font-size: 1.2rem;">➔</div>
+        <div class="tlb-node">
+          <div class="tlb-node-title">Physical Memory Frame</div>
+          <div id="tlb-frame-num" style="font-family: var(--font-mono); font-size: 0.85rem; margin-top: 4px;">Frame f: 5</div>
+          <div id="tlb-phys-addr" style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--color-emerald); font-weight: 700;">0x5A3C (23100)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contiguous Allocation Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <h3 class="panel-title" style="font-size: 0.95rem;">Contiguous Dynamic Memory Allocation</h3>
+        <div style="display: flex; gap: 8px;">
+          <button id="btn-compact-mem" class="btn btn-secondary btn-sm" aria-label="Run memory compaction">Compact Memory</button>
+          <button id="btn-reset-mem" class="btn btn-secondary btn-sm" aria-label="Reset memory blocks">Reset</button>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap;">
+        <div class="form-group" style="width: 140px;">
+          <label for="alloc-proc-name" class="form-label">Process ID</label>
+          <input id="alloc-proc-name" class="form-input" value="Proc_A" aria-label="Process Name">
+        </div>
+        <div class="form-group" style="width: 140px;">
+          <label for="alloc-proc-size" class="form-label">Size (KB)</label>
+          <input id="alloc-proc-size" type="number" min="10" max="600" class="form-input" value="212" aria-label="Process Size KB">
+        </div>
+        <div class="form-group" style="width: 160px;">
+          <label for="alloc-algo-select" class="form-label">Fit Strategy</label>
+          <select id="alloc-algo-select" class="form-select" aria-label="Allocation strategy">
+            <option value="FIRST_FIT">First Fit</option>
+            <option value="BEST_FIT">Best Fit</option>
+            <option value="WORST_FIT">Worst Fit</option>
+          </select>
+        </div>
+        <button id="btn-alloc-mem" class="btn btn-primary" aria-label="Allocate memory to process">Allocate</button>
+        <div style="margin-left: auto; font-size: 0.85rem; color: var(--text-muted);">
+          External Fragmentation: <strong id="alloc-metric-frag" style="color:var(--color-amber);">0 KB</strong>
+        </div>
+      </div>
+
+      <div class="memory-bar-wrapper">
+        <div id="contiguous-mem-bar" class="memory-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>

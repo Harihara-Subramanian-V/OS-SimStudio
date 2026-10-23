@@ -1,0 +1,102 @@
+<section id="section-storage" class="tab-section" style="display: none;" aria-labelledby="storage-tab-heading">
+  <div class="panel-header">
+    <h2 id="storage-tab-heading" class="panel-title">
+      <span class="brand-logo-icon" style="width:28px; height:28px; font-size:0.85rem;">M4</span>
+      Storage & Disk Arm Scheduling Simulator
+    </h2>
+    <span class="badge badge-ready">Module 4 & Lab 7</span>
+  </div>
+
+  <div class="disk-layout">
+    <!-- Controls Column -->
+    <div class="panel">
+      <h3 class="panel-title" style="font-size: 0.95rem; margin-bottom: 12px;">Disk Request Parameters</h3>
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="disk-algo-select" class="form-label">Disk Arm Algorithm</label>
+        <select id="disk-algo-select" class="form-select" aria-label="Disk scheduling algorithm">
+          <option value="FCFS">FCFS (First-Come, First-Served)</option>
+          <option value="SSTF">SSTF (Shortest Seek Time First)</option>
+          <option value="SCAN">SCAN (Elevator Algorithm)</option>
+          <option value="C-SCAN">C-SCAN (Circular SCAN)</option>
+          <option value="LOOK">LOOK</option>
+          <option value="C-LOOK">C-LOOK</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="disk-head-input" class="form-label">Initial Head Position (0 - 199)</label>
+        <input id="disk-head-input" type="number" min="0" max="199" value="53" class="form-input" aria-label="Initial disk head position">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="disk-dir-select" class="form-label">Arm Sweep Direction</label>
+        <select id="disk-dir-select" class="form-select" aria-label="Arm sweep direction">
+          <option value="UP">Ascending (Towards 199)</option>
+          <option value="DOWN">Descending (Towards 0)</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label for="disk-queue-input" class="form-label">Track Request Queue (0 - 199)</label>
+        <input id="disk-queue-input" class="form-input" value="98, 183, 37, 122, 14, 124, 65, 67" aria-label="Disk track request sequence">
+      </div>
+
+      <button id="btn-run-disk" class="btn btn-primary" style="width: 100%;" aria-label="Run disk simulation">Simulate Head Trajectory</button>
+
+      <div style="margin-top: 20px;">
+        <h4 style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">Step Traversal Table</h4>
+        <div style="max-height: 180px; overflow-y: auto;">
+          <table class="table-custom" aria-label="Disk seek steps">
+            <thead>
+              <tr><th>Step</th><th>From</th><th>To</th><th>Seek</th></tr>
+            </thead>
+            <tbody id="disk-seek-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visualization Column -->
+    <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div id="disk-metric-total" class="metric-value">0 cyl</div>
+          <div class="metric-label">Total Head Movements</div>
+        </div>
+        <div class="metric-card">
+          <div id="disk-metric-avg" class="metric-value">0.0 cyl</div>
+          <div class="metric-label">Average Seek Distance</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title" style="font-size: 0.95rem;">Cylinder Seek Trajectory Chart</h3>
+          <span style="font-size: 0.75rem; color: var(--text-subtle);">Cylinders 0 to 199</span>
+        </div>
+        <div class="disk-canvas-card">
+          <canvas id="disk-chart-canvas" class="disk-chart-canvas" aria-label="Disk seek trajectory chart"></canvas>
+        </div>
+        <div style="margin-top: 10px; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
+          Sequence: <span id="disk-metric-seq" style="color: var(--color-primary);"></span>
+        </div>
+      </div>
+
+      <!-- File Space Allocation Sandbox -->
+      <div class="panel">
+        <div class="panel-header">
+          <h3 class="panel-title" style="font-size: 0.95rem;">File Allocation Techniques (Disk Blocks)</h3>
+          <div class="form-group" style="width: 170px;">
+            <select id="file-alloc-method" class="form-select btn-sm" aria-label="File allocation technique">
+              <option value="CONTIGUOUS">Contiguous Allocation</option>
+              <option value="LINKED">Linked List Allocation</option>
+              <option value="INDEXED">Indexed Allocation (i-node)</option>
+            </select>
+          </div>
+        </div>
+        <div id="disk-blocks-grid" class="disk-blocks-grid" aria-label="Disk blocks map"></div>
+        <div id="file-dir-entries" class="dir-table-wrapper"></div>
+      </div>
+    </div>
+  </div>
+</section>

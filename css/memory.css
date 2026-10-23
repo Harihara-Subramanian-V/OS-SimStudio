@@ -1,0 +1,143 @@
+/* Memory Management & Virtual Memory Styles */
+.memory-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+/* Reference String Stream */
+.ref-string-stream {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: var(--space-sm) 0;
+  margin-bottom: var(--space-md);
+}
+
+.ref-pill {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.ref-pill.active {
+  border-color: var(--color-primary);
+  background: rgba(0, 242, 254, 0.2);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+}
+
+/* Paging Table Grid */
+.frames-matrix-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.frames-matrix {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.frames-matrix th, .frames-matrix td {
+  padding: 8px 10px;
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+}
+
+.cell-hit {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  font-weight: 700;
+}
+
+.cell-fault {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+  font-weight: 700;
+}
+
+/* Contiguous Allocation Memory Bar */
+.memory-bar-wrapper {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.memory-bar {
+  display: flex;
+  height: 60px;
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.memory-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-fast);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 2px;
+}
+
+.block-free {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-muted);
+}
+
+.block-allocated {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.4), rgba(121, 40, 202, 0.4));
+  color: #fff;
+  border: 1px solid rgba(0, 242, 254, 0.5);
+}
+
+/* TLB Translation Visual Diagram */
+.tlb-flow-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--bg-input);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  margin-top: var(--space-md);
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.tlb-node {
+  background: rgba(16, 22, 34, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  text-align: center;
+}
+
+.tlb-node-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-transform: uppercase;
+}

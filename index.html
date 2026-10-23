@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OS-SimStudio: Comprehensive Operating System Principles Interactive Simulation Suite covering Process Scheduling, Deadlocks, Virtual Memory Paging, and Disk Storage Management.">
+  <meta name="keywords" content="Operating Systems, Simulation, CPU Scheduling, Banker's Algorithm, Page Replacement, Disk Scheduling, BAITE201">
+  <title>OS-SimStudio | Operating System Principles Simulation Suite</title>
+  
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/buttons.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/modals.css">
+  <link rel="stylesheet" href="css/cpu.css">
+  <link rel="stylesheet" href="css/sync.css">
+  <link rel="stylesheet" href="css/memory.css">
+  <link rel="stylesheet" href="css/storage.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Main Sticky Application Header -->
+    <header class="app-header">
+      <div class="brand-section">
+        <div class="brand-logo-icon" aria-hidden="true">OS</div>
+        <div>
+          <h1 class="brand-title">
+            OS-SimStudio
+            <span class="course-badge">BAITE201</span>
+          </h1>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs (M1 to M4) -->
+      <nav class="nav-tabs" role="tablist" aria-label="Operating System Modules">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="cpu" id="tab-cpu">
+          <span>⚙️ M1: CPU & Process</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="sync" id="tab-sync">
+          <span>🔒 M2: Concurrency & Deadlocks</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="memory" id="tab-memory">
+          <span>💾 M3: Memory & Virtual Mem</span>
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="storage" id="tab-storage">
+          <span>💽 M4: Storage & Files</span>
+        </button>
+      </nav>
+
+      <!-- Global Controls -->
+      <div style="display: flex; align-items: center; gap: var(--space-sm);">
+        <select id="preset-lab-select" class="form-select btn-sm" aria-label="Load Syllabus Indicative Lab Experiment">
+          <option value="" disabled selected>Load Lab Experiment ▾</option>
+          <option value="LAB_3">Lab 3: CPU Scheduling (Round Robin)</option>
+          <option value="LAB_4">Lab 4: Semaphores & Dining Philosophers</option>
+          <option value="LAB_5">Lab 5: Deadlock Avoidance (Banker's)</option>
+          <option value="LAB_6">Lab 6: Paging (LRU & Belady)</option>
+          <option value="LAB_7">Lab 7: Disk Scheduling & File Space</option>
+        </select>
+
+        <button id="btn-generate-report" class="btn btn-primary btn-sm" aria-label="Generate Academic Laboratory Report">
+          📋 Generate Report
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Module Viewport -->
+    <main class="app-main" id="main-content">
+      <!-- Dynamic module templates loaded here -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div>
+        <strong>OS-SimStudio</strong> &bull; BAITE201 Operating System Principles Simulation Suite
+      </div>
+      <div>
+        Aligned with Silberschatz & Tanenbaum OS Curricula
+      </div>
+    </footer>
+  </div>
+
+  <!-- Academic Lab Report Modal -->
+  <div id="report-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="report-modal-title">
+    <div class="modal-card">
+      <div class="panel-header">
+        <h2 id="report-modal-title" class="panel-title">Academic Laboratory Report</h2>
+        <div style="display: flex; gap: 8px;">
+          <button id="btn-download-report" class="btn btn-primary btn-sm" aria-label="Download Markdown Report">Download .MD</button>
+          <button id="btn-print-report" class="btn btn-secondary btn-sm" aria-label="Print Report">Print / PDF</button>
+          <button id="btn-close-report" class="btn btn-danger btn-sm" aria-label="Close modal">✕</button>
+        </div>
+      </div>
+      <div id="report-modal-content" style="padding: 12px 0;"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
